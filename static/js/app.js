@@ -27,7 +27,7 @@ function Plot(id) {
     d3.json(url).then(function (data) {
         let sampleData = data;
         let samples = sampleData.samples;
-        let identifier = samples.filter(SAMPLE => SAMPLE.ID === id);
+        let identifier = samples.filter(sample => sample.id === id);
         let filtered = identifier[0];
         let OTUvalues = filtered.sample_values.slice(0, 10).reverse();
         let OTUids = filtered.otu_ids.slice(0, 10).reverse();
@@ -73,8 +73,8 @@ function Plot(id) {
 
 // When ID changes.
 function optionChanged(id) {
-    Plots(id),
-    panelInfo(id);
+    Plot(id),
+    bellyInfo(id);
 };
 
 // Code for Dropdown Screen. 
@@ -88,8 +88,8 @@ function init() {
         Object.values(names).forEach(value => {
             dropDown.append('option').text(value);
         })
-        panelInfo(names[0]);
-        Plots(names[0])
+        bellyInfo(names[0]);
+        Plot(names[0])
     })
 };
 
